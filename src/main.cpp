@@ -34,16 +34,17 @@ using namespace std;
 int main ()
 {
 
-    printf"-------------------------------------------------  ";
-    printf"  ___                   ____                       ";
-	printf" / _ \ _ __   ___ _ __ | __ ) _ __ _____      __   ";
-	printf"| | | | '_ \ / _ \ '_ \|  _ \| '__/ _ \ \ /\ / /   ";
-	printf"| |_| | |_) |  __/ | | | |_) | | |  __/\ V  V /    ";
-	printf" \___/| .__/ \___|_| |_|____/|_|  \___| \_/\_/     ";
-	printf"      |_|                                          ";
-	printf"-------------------------------------------------  ";
-	printf"Author: James McLean <james.mclean@gmail.com       ";
-	printf"-------------------------------------------------  ";
+	// This looks a bit funky because the slashes all need to be escaped.
+	cout << "-------------------------------------------------  " << endl;
+	cout << "  ___                   ____                       " << endl;
+	cout << " / _ \\ _ __   ___ _ __ | __ ) _ __ _____      __   " << endl;
+	cout << "| | | | '_ \\ / _ \\ '_ \\|  _ \\| '__/ _ \\ \\ /\\ / /   " << endl;
+	cout << "| |_| | |_) |  __/ | | | |_) | | |  __/\\ V  V /    " << endl;
+	cout << " \\___/| .__/ \\___|_| |_|____/|_|  \\___| \\_/\\_/     " << endl;
+	cout << "      |_|                                          " << endl;
+	cout << "-------------------------------------------------  " << endl;
+	cout << "Author: James McLean <james.mclean@gmail.com       " << endl;
+	cout << "-------------------------------------------------  " << endl;
 
     char * recipePath = "docs/step_mash_recipe.xml";
 
