@@ -81,16 +81,7 @@ void runBatch::runSteps(Vessel vessel) {
     //int i;
 
     cout << "Processing ";
-    if(vessel.getVesselType() == VESSEL_HLT) {
-        cout << "HLT";
-    }
-    if(vessel.getVesselType() == VESSEL_MLT) {
-        cout << "MLT";
-    }
-    if(vessel.getVesselType() == VESSEL_KETTLE) {
-        cout << "Kettle";
-    }
-
+    cout << vessel.getVesselName();
     cout << " Steps. " << numSteps << " steps to perform. " << endl;
 
     if(numSteps == 0) {
@@ -109,18 +100,19 @@ void runBatch::runSteps(Vessel vessel) {
 
         Step thisStep = steps[i];
 
-        cout << "Running step name " << thisStep.getStepName() << endl;
+        cout << "Vessel: " << vessel.getVesselName() << endl;
+        cout << "Running step name '" << thisStep.getStepName() << "'" << endl;
         cout << "Step will run for " << thisStep.getStepLength() << " minutes" << endl;
 
 
         thisStep.stepActions();
 
-
         sleep(10);
 
-        cout << "Vessel: " << vessel.getVesselType() << " Step:" << thisStep.getStepName() << " Step is complete. Proceeding to next step" << endl;
+        cout << "Vessel: " << vessel.getVesselName() << endl;
+        cout << "Step: '" << thisStep.getStepName() << "' step is complete. Proceeding to next step" << endl;
         cout << endl;
-        cout << "=================================" << endl;
+        cout << "------------------" << endl;
         cout << endl;
 
 

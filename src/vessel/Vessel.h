@@ -51,6 +51,7 @@ public:
 	virtual ~Vessel();
 	void addStep(Step thisStep);
 	int getVesselType();
+	string getVesselName();
 	void setVesselType(int vesselType);
 	int getNumSteps();
 	vector<Step> getAllSteps();

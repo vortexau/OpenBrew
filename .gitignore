@@ -28,4 +28,5 @@ Makefile.in
 *.deps
 *.dirstamp
 config.*
+Makefile
 

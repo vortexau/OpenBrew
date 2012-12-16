@@ -45,6 +45,18 @@ int Vessel::getVesselType() {
 	return vesselType;
 }
 
+string Vessel::getVesselName() {
+    if(vesselType == VESSEL_HLT) {
+        return "HLT";
+    }
+    if(vesselType == VESSEL_MLT) {
+        return "MLT";
+    }
+    if(vesselType == VESSEL_KETTLE) {
+        return "Kettle";
+    }
+}
+
 void Vessel::setVesselType(int vesselType) {
 	this->vesselType = vesselType;
 }

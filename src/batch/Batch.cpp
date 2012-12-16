@@ -100,7 +100,7 @@ int Batch::parseRecipe() {
             // Get some details of this step from the recipe.
             stepName   = step.child("NAME").child_value();
             stepTemp   = atof(step.child("STEP_TEMP").child_value()); 
-            stepLength = atof(step.child("STEP_LENGTH").child_value());
+            stepLength = atof(step.child("STEP_TIME").child_value());
             stepNumber = 0; // get this step number from the order of the mash steps.
 
             cout << "Step Name: '" << stepName << "'. Temp: " << stepTemp << "c for " << stepLength << " minutes" << endl;
@@ -244,7 +244,8 @@ void Batch::run() {
             break;
         case 0:
             // this is the child.
-            cout << "This is the Child, PID is: " << getpid() << endl;
+        	cout << "Process is totally forked. ";
+            cout << "PID is: " << getpid() << endl;
 
             batch.runSteps(getVessel(i));
 
