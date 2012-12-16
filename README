@@ -8,22 +8,20 @@ SBC which controls the brewery: BeagleBone board; ARM CPU.
 HLT:
  * 2400watt element for heating water
  * 'little brown pump' for recirculating water in the HLT while heating.
- * 48L 'wide' Stainless pot. Side draining. (70L pot to be moved into service soon)
+ * 48L 'wide' Stainless pot. Side draining.
  * Solid State Relay for Element control.
- * 12v Relay for Brown Pump control.
  * Water temp sensor in side of vessel, thermowell with DS18B20 Sensor
  
 Mash Tun.
- * 60L Square Esky. (70L pot to be put into service as a MLT shortly)
+ * 60L Square Esky
  * Recirculation via March Pump
  * RIMS tube with 2400watt element
  * Solid State Relay for Element control.
- * Thermowell in side of mashtun (DS18B20)
- * Thermowell in RIMS tube (DS18B20)
- * May consider averaging these inputs.
+ * Thermowell in side of mashtun
+ * Thermowell in mash return (t-piece)
  
 Kettle
- * 70L Kettle (98L kettle to be put into service later)
+ * 70L Kettle
  * Whirlpool fitting
  * Pickup at base of kettle
  
