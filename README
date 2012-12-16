@@ -1,0 +1,183 @@
+OpenBrew. Software for Linux and UNIX-like OS for controlling a Brewery.
+
+I've designed and written this software to suit /my/ brewery, however I aim to keep it extensible enough for modifications to suit larger breweries and installations.
+
+My Brewery:
+SBC which controls the brewery: BeagleBone board; ARM CPU.
+
+HLT:
+ * 2400watt element for heating water
+ * 'little brown pump' for recirculating water in the HLT while heating.
+ * 48L 'wide' Stainless pot. Side draining. (70L pot to be moved into service soon)
+ * Solid State Relay for Element control.
+ * 12v Relay for Brown Pump control.
+ * Water temp sensor in side of vessel, thermowell with DS18B20 Sensor
+ 
+Mash Tun.
+ * 60L Square Esky. (70L pot to be put into service as a MLT shortly)
+ * Recirculation via March Pump
+ * RIMS tube with 2400watt element
+ * Solid State Relay for Element control.
+ * Thermowell in side of mashtun (DS18B20)
+ * Thermowell in RIMS tube (DS18B20)
+ * May consider averaging these inputs.
+ 
+Kettle
+ * 70L Kettle (98L kettle to be put into service later)
+ * Whirlpool fitting
+ * Pickup at base of kettle
+ 
+Chiller
+ * Twin plate chillers
+ * Pre-chiller to chill water going to second chiller
+ * Temp sensors on wort ingress and egress
+
+---------------
+
+Processes for the software to control.
+
+Timer for HLT Fill and Heating.
+- Plug the brewery panel in, enable 'Standby Mode'. When going to Standby mode, the software will perform an NTPDate update of the system clock to ensure it's accurate. 
+- Standby mode, allow the user to either fill the HLT manually, or to auto-fill (such as via RO or 'normal' water filters) at X time.
+- Choose "Ready Target" time, say 7am - this will allow the system to auto-fill at 5am, heat water to either set point (say 75c) via PID, and HOLD at temp. 
+- Option of heat to a boil, hold boil for 15 minutes, then allow to cool, and then hold at X temp via PID, ready to use for mash-in.
+- When heater is active, enable 'little brown pump' to circulate the HLT water content to avoid stratification of the water temps. Possibly disable this at temps above 80c, as IIRC it's not rated above that.
+- Flow Meter on auto-fill in-line after solenoid controlled valve for HLT fill. Alarm if filling does not create flow.
+
+Mash tun
+- Flow meter
+- Alarm if flow drops too low
+- Kill heating element if flow drops too low.
+- Only enable Heating element if pump is on.
+- Step mashing as defined in the recipe file.
+- Starting the mash profile may require a user to say 'ok' as hoses and valves may need to be manually setup.
+
+Kettle
+- Brew Timer support in the GUI, alarm according to the recipe for various items (hop additions, flame out etc).
+- Automate whirlpool control - At flame out, enable pump for X amount of time, count down timer for X time to allow trub cone to form.
+
+---------------
+
+
+program structure basic ideas.
+
+classes:
+
+vessel
+ - abstract addStep(Step step);
+ - int maxVolume // volume in mL, null means has no volume
+ 
+ - liquortun (extend vessel)
+ - mashtun (extend vessel)
+ - kettletun (extend vessel)
+
+// 0 HLT_AUTO_FILL
+// 1 HLT_BOIL
+// 2 HLT_HOLD 
+// 3 HLT_
+
+// 10 MASH_IN 
+// 11 MASH_BETA_GLUCAN
+// 12 MASH_PROTEIN
+// 13 MASH_BETA_AMYLASE
+// 14 MASH_ALPHA_AMYLASE
+// 15 MASH_REST
+// 16 MASH_VORLAUF
+// 19 MASH_OUT
+
+// 20 MASH_BATCH_DRAIN
+// 21 MASH_BATCH_SPARGE
+// 22 MASH_FLY_SPARGE
+
+
+// 30 BOIL_STEP
+// 31 BOIL_ADDITION
+// 39 BOIL_FLAMEOUT
+
+// 40 WHIRLPOOL_START
+// 41 WHIRLPOOL_RUN
+// 42 WHIRLPOOL_REST
+// 49 WHIRLPOOL_END
+
+// 51 CHILLER_START
+// 52 CHILLER_RUN
+// 59 CHILLER_END
+
+Step Abstract
+ - private stepOrder;
+ - private stepTemp;
+ - private stepStartTime;
+ - private stepRunTime; // seconds.
+ - private stepType; 
+ - private stepRecirc = T/F;
+
+
+mashInStep extends Step
+
+betaGlucanStep extends Step
+  - stepOrder ??
+  - stepTemp 43.0;
+  - stepTime 900 (15 mins).
+  - stepType = MASH_BETA_GLUCAN
+
+proteinStep extends Step
+
+betaAmylaseStep extends Step
+
+alphaAmylaseStep extends Step
+
+mashOutStep extends Step
+
+---------
+
+load a batch, (parse beerxml file?)
+batch always has:
+    HLT
+    MLT
+    KETTLE
+    
+each vessel comprises a number of steps.
+a step needs to be able to do many things:
+    - enable/disable pump(s)
+    - enable/disable heating element(s)
+    - run for a certain amount of time.
+    
+Perhaps a method written to do the action execution could be passed a step object one at a time to perform actions as needed.
+    - watch temps
+    - enable/disable pumps based on flow
+    - enable/disable elements based on flow
+    - enable/disable alarms based on flow
+
+// ----
+
+Create UDEV rules for sensors, pumps and relays: http://www.reactivated.net/writing_udev_rules.html
+can have paths such as /dev/pump1 /dev/pump2 possibly even for OneWire sensors also, say /dev/hlt_temp1 /dev/hlt_temp2 etc.
+
+
+-- parsing beerxml file
+
+-- Steps to Generate
+
+Xpath for various variables:
+//recipes/recipe/mash/sparge_temp.child_value()
+
+Mash Profile Name
+pugi::xml_node mash_name = doc.child("RECIPES").child("RECIPE").child("MASH").child("NAME");
+cout << "recipe name: #" << mash_name.child_value() << "# " << endl; // get sparge temp.
+
+Sparge Temp:
+pugi::xml_node sparge_temp = doc.child("RECIPES").child("RECIPE").child("MASH").child("SPARGE_TEMP");
+cout << "recipe name: #" << sparge_temp.child_value() << "# " << endl; // get sparge temp.
+
+//recipes/recipe/mash/mash_steps/ path to all mash steps
+
+//recipes/recipe/mash/mash_steps/mash_step[i]/
+//recipes/recipe/mash/mash_steps/mash_step[i]/name
+//recipes/recipe/mash/mash_steps/mash_step[i]/type
+//recipes/recipe/mash/mash_steps/mash_step[i]/infuse_amount (water to add)
+//recipes/recipe/mash/mash_steps/mash_step[i]/step_time - length of step in minutes
+//recipes/recipe/mash/mash_steps/mash_step[i]/step_temp - temperature to maintain during step
+//recipes/recipe/mash/mash_steps/mash_step[i]/ramp_time - time to take to raise temp
+//recipes/recipe/mash/mash_steps/mash_step[i]/end_temp  - temp to be at the end of the step
+//recipes/recipe/mash/mash_steps/mash_step[i]/infuse_temp 
+
