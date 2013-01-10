@@ -16,7 +16,7 @@ int main() {
 	int file;
 
 	if ((file = open("/dev/i2c-3", O_RDWR)) < 0) {
-		cout << "Failed to open BMA180 Sensor on  I2C Bus" << en
+		cout << "Failed to open connection to the I2C Bus" << en
 		dl;
 		return (1);
 	}
@@ -28,7 +28,10 @@ int main() {
 
 	// Turn all the relays on. We do this by sending 0
 	if (i2c_smbus_write_byte(file, 0x00) < 0) {
-		cout << "Failed to Reset Address in readFullSensorState() " << endl;
+		cout << "Failed to enable all relays!" << endl;
+	} else {
+		cout << "All relays enabled." << endl;
+		
 	}
 
 	sleep(2);
@@ -39,7 +42,9 @@ int main() {
 	// Turn all the relays off.
 	// We do this by sending 255.
 	if (i2c_smbus_write_byte(file, 0xFF) < 0) {
-		cout << "Failed to Reset Address in readFullSensorState() " << endl;
+		cout << "Failed to disable all relays!" << endl;
+	} else {
+		cout << "All relays disabled" << endl;
 	}
 
 	cout << "Closing I2C Bus" << endl;
