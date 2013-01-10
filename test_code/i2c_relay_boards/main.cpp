@@ -10,11 +10,11 @@ using namespace std;
 
 int main() {
 
-	// BeagleBone specific I2C bus
 	cout << "Opening I2C Bus" << endl;
 
 	int file;
 
+	// BeagleBone specific I2C bus
 	if ((file = open("/dev/i2c-3", O_RDWR)) < 0) {
 		cout << "Failed to open connection to the I2C Bus" << en
 		dl;
