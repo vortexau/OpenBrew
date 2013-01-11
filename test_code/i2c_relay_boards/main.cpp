@@ -6,14 +6,16 @@
 
 using namespace std;
 
-#define RELAY_BOARD 0x20; //30a Relay Board
-#define RELAY_ON    1;
-#define RELAY_OFF   0;	
+#define RELAY_BOARD 0x20 //30a Relay Board
+#define RELAY_ON    1
+#define RELAY_OFF   0
 
 int pin_array[2][8] = {
   0B01111111, 0B10111111, 0B11011111, 0B11101111, 0B11110111, 0B11111011, 0B11111101, 0B11111110,
   0B10000000, 0B01000000, 0B00100000, 0B00010000, 0B00001000, 0B00000100, 0B00000010, 0B00000001
 };
+
+void relayAction(int file, int addr, int pin, int x);
 
 int main() {
 
@@ -23,8 +25,7 @@ int main() {
 
 	// BeagleBone specific I2C bus
 	if ((file = open("/dev/i2c-3", O_RDWR)) < 0) {
-		cout << "Failed to open connection to the I2C Bus" << en
-		dl;
+		cout << "Failed to open connection to the I2C Bus" << endl;
 		return (1);
 	}
 
@@ -42,7 +43,7 @@ int main() {
         
         relayAction(file, RELAY_BOARD, i, RELAY_OFF);
         
-        sleep(1)
+        sleep(1);
         
     }
 
@@ -77,7 +78,7 @@ int main() {
 void relayAction(int file, int addr, int pin, int x) {
   //state = PCF8574.read(addr);   
   // Read the current state fo the relay board.
-  state = i2c_smbus_read_byte(file);
+  int state = i2c_smbus_read_byte(file);
 
   // Using bitwise, add or subtract the relay you wish to turn on or off.
   if (x == RELAY_ON) { 
@@ -87,6 +88,6 @@ void relayAction(int file, int addr, int pin, int x) {
   }
   
   //PCF8574.write(addr, state);       // ON
-  i2c_smbus_write_bite(file, state);
+  i2c_smbus_write_byte(file, state);
 }
 
