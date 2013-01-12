@@ -10,10 +10,18 @@ using namespace std;
 #define RELAY_ON    1
 #define RELAY_OFF   0
 
-int pin_array[2][8] = {
-  0B01111111, 0B10111111, 0B11011111, 0B11101111, 0B11110111, 0B11111011, 0B11111101, 0B11111110,
-  0B10000000, 0B01000000, 0B00100000, 0B00010000, 0B00001000, 0B00000100, 0B00000010, 0B00000001
-};
+#define RELAY_8     0
+#define RELAY_7     1
+#define RELAY_6     2
+#define RELAY_5     3
+#define RELAY_4     4
+#define RELAY_3     5
+#define RELAY_2     6
+#define RELAY_1     7
+
+int pin_array[2][8] = { 0B01111111, 0B10111111, 0B11011111, 0B11101111,
+		0B11110111, 0B11111011, 0B11111101, 0B11111110, 0B10000000, 0B01000000,
+		0B00100000, 0B00010000, 0B00001000, 0B00000100, 0B00000010, 0B00000001 };
 
 void relayAction(int file, int addr, int pin, int x);
 
@@ -34,25 +42,36 @@ int main() {
 		return (2);
 	}
 
-    // scroll thtrough the relays, switch on, then off.
-    for(int i = 0; i < 8; i++) {
-        
-        relayAction(file, RELAY_BOARD, i, RELAY_ON);
-        
-        sleep(1);
-        
-        relayAction(file, RELAY_BOARD, i, RELAY_OFF);
-        
-        sleep(1);
-        
-    }
+	// scroll thtrough the relays, switch on, then off.
+	for (int i = 0; i < 8; i++) {
+
+		relayAction(file, RELAY_BOARD, i, RELAY_ON);
+
+		sleep(1);
+
+		relayAction(file, RELAY_BOARD, i, RELAY_OFF);
+
+		sleep(1);
+
+	}
+
+	sleep(3);
+
+	// Relay 1
+	cout << "Relay 1" << endl;
+	relayAction(file, RELAY_BOARD, RELAY_1, RELAY_ON);
+	sleep(1);
+	relayAction(file, RELAY_BOARD, RELAY_1, RELAY_OFF);
+	cout << "Relay 1, Off" << endl;
+
+	sleep(3);
 
 	// Turn all the relays on. We do this by sending 0
 	if (i2c_smbus_write_byte(file, 0x00) < 0) {
 		cout << "Failed to enable all relays!" << endl;
 	} else {
 		cout << "All relays enabled." << endl;
-		
+
 	}
 
 	sleep(2);
@@ -76,18 +95,18 @@ int main() {
 }
 
 void relayAction(int file, int addr, int pin, int x) {
-  //state = PCF8574.read(addr);   
-  // Read the current state fo the relay board.
-  int state = i2c_smbus_read_byte(file);
+	//state = PCF8574.read(addr);
+	// Read the current state fo the relay board.
+	int state = i2c_smbus_read_byte(file);
 
-  // Using bitwise, add or subtract the relay you wish to turn on or off.
-  if (x == RELAY_ON) { 
-      state &= pin_array[0][pin];                      
-  } else if (x == RELAY_OFF) {
-      state |= pin_array[1][pin]; 
-  }
-  
-  //PCF8574.write(addr, state);       // ON
-  i2c_smbus_write_byte(file, state);
+	// Using bitwise, add or subtract the relay you wish to turn on or off.
+	if (x == RELAY_ON) {
+		state &= pin_array[0][pin];
+	} else if (x == RELAY_OFF) {
+		state |= pin_array[1][pin];
+	}
+
+	//PCF8574.write(addr, state);       // ON
+	i2c_smbus_write_byte(file, state);
 }
 
