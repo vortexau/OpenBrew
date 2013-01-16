@@ -13,12 +13,12 @@ HLT:
  * Water temp sensor in side of vessel, thermowell with DS18B20 Sensor
  
 Mash Tun.
- * 60L Square Esky (Bilding 70L Stainless mashtun currently)
+ * 60L Square Esky (Building 70L Stainless mashtun currently)
  * Recirculation via March Pump
  * RIMS tube with 2400watt element
  * Solid State Relay for Element control.
- * Thermowell in side of mashtun
- * Thermowell in mash return (t-piece)
+ * Thermowell in side of mashtun (DS18B20 Sensor)
+ * Thermowell in RIMS tube after element
  
 Kettle
  * 70L Kettle (planning upgrade to 98L kettle)
