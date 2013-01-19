@@ -19,15 +19,61 @@ using namespace std;
 #define RELAY_2     6
 #define RELAY_1     7
 
-int pin_array[2][8] = { 0B01111111, 0B10111111, 0B11011111, 0B11101111,
-		0B11110111, 0B11111011, 0B11111101, 0B11111110, 0B10000000, 0B01000000,
-		0B00100000, 0B00010000, 0B00001000, 0B00000100, 0B00000010, 0B00000001 };
+int pin_array[2][8] = {
+		0B01111111, 0B10111111, 0B11011111, 0B11101111, 0B11110111, 0B11111011, 0B11111101, 0B11111110,
+		0B10000000, 0B01000000, 0B00100000, 0B00010000, 0B00001000, 0B00000100, 0B00000010, 0B00000001
+};
 
-void relayAction(int file, int addr, int pin, int x);
+int relayAction(int addr, int pin, int x);
 
 int main() {
 
 	cout << "Opening I2C Bus" << endl;
+
+
+
+
+	cout << "'Random' relay test. Should see 7, 3, 4 go on. 7 off, 4 off, 7 on, 4 off, 3 off, 7 off." << endl;
+
+	// Relay 7 - On
+	relayAction(RELAY_BOARD, RELAY_7, RELAY_ON);
+	sleep(1);
+	// Relay 3 - On
+	relayAction(RELAY_BOARD, RELAY_3, RELAY_ON);
+	sleep(1);
+	// Relay 4 - On
+	relayAction(RELAY_BOARD, RELAY_4, RELAY_ON);
+	sleep(5);
+	// Relay 7 - Off
+	relayAction(RELAY_BOARD, RELAY_7, RELAY_OFF);
+	sleep(1);
+	// Relay 4 - Off
+	relayAction(RELAY_BOARD, RELAY_4, RELAY_OFF);
+	sleep(1);
+	// Relay 7 - On
+	relayAction(RELAY_BOARD, RELAY_7, RELAY_ON);
+	sleep(1);
+	// Relay 4 - Off
+	relayAction(RELAY_BOARD, RELAY_4, RELAY_OFF);
+	sleep(1);
+	// Relay 3 - Off
+	relayAction(RELAY_BOARD, RELAY_3, RELAY_OFF);
+	sleep(1);
+	// Relay 7 - Off
+	relayAction(RELAY_BOARD, RELAY_7, RELAY_OFF);
+	sleep(1);
+
+	cout << "Aaaaand, done!" << endl;
+
+
+	cout << "Closing I2C Bus" << endl;
+
+
+
+	return 0;
+}
+
+int relayAction(int addr, int pin, int x) {
 
 	int file;
 
@@ -42,59 +88,6 @@ int main() {
 		return (2);
 	}
 
-	// scroll thtrough the relays, switch on, then off.
-	for (int i = 0; i < 8; i++) {
-
-		relayAction(file, RELAY_BOARD, i, RELAY_ON);
-
-		sleep(1);
-
-		relayAction(file, RELAY_BOARD, i, RELAY_OFF);
-
-		sleep(1);
-
-	}
-
-	sleep(3);
-
-	// Relay 1
-	cout << "Relay 1" << endl;
-	relayAction(file, RELAY_BOARD, RELAY_1, RELAY_ON);
-	sleep(1);
-	relayAction(file, RELAY_BOARD, RELAY_1, RELAY_OFF);
-	cout << "Relay 1, Off" << endl;
-
-	sleep(3);
-
-	// Turn all the relays on. We do this by sending 0
-	if (i2c_smbus_write_byte(file, 0x00) < 0) {
-		cout << "Failed to enable all relays!" << endl;
-	} else {
-		cout << "All relays enabled." << endl;
-
-	}
-
-	sleep(2);
-
-	// We will need to work out a sensible way to turn relays on and off
-	// using the hex methods.
-
-	// Turn all the relays off.
-	// We do this by sending 255.
-	if (i2c_smbus_write_byte(file, 0xFF) < 0) {
-		cout << "Failed to disable all relays!" << endl;
-	} else {
-		cout << "All relays disabled" << endl;
-	}
-
-	cout << "Closing I2C Bus" << endl;
-
-	close(file);
-
-	return 0;
-}
-
-void relayAction(int file, int addr, int pin, int x) {
 	//state = PCF8574.read(addr);
 	// Read the current state fo the relay board.
 	int state = i2c_smbus_read_byte(file);
@@ -108,5 +101,7 @@ void relayAction(int file, int addr, int pin, int x) {
 
 	//PCF8574.write(addr, state);       // ON
 	i2c_smbus_write_byte(file, state);
+
+	close(file);
 }
 
