@@ -1,6 +1,6 @@
 OpenBrew. Software for Linux and UNIX-like OS for controlling a Brewery.
 
-I've designed and written this software to suit /my/ brewery, however I aim to keep it extensible enough for modifications to suit larger breweries and installations.
+I've designed and written this software to suit /my/ brewery, however I aim to keep it extensible enough for modifications to suit larger breweries and installations. As it's a 'home' brewery, I have no desire to implement real-time 'stuff'. If the OS takes a second to respond to a temp or to enable a pump, well it won't be the end of the world. Deal with it :)
 
 My Brewery:
 
