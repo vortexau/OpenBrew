@@ -4,20 +4,24 @@ I've designed and written this software to suit /my/ brewery, however I aim to k
 
 My Brewery:
 SBC which controls the brewery: BeagleBone board; ARM CPU.
+30a @ 250v Mechanical Relay Board, 8 relays: http://www.ereshop.com/shop/i2c-bus-heavy-current-relay-12v-pcf8574-p-771.html
+Software is all C/C++.
+Trying to keep it as free as possible, avoiding BOOST if I can (though that may be foolish).
 
 HLT:
  * 2400watt element for heating water
  * 'little brown pump' for recirculating water in the HLT while heating.
  * 48L 'wide' Stainless pot. Side draining. (70L stainless pot when main kettle is upgraded.)
- * Solid State Relay for Element control.
+ * 30a @ 250v Mechanical Relay for Element control.
+ * 30a @ 250v Mechanical Relay for Recirc pump control.
  * Water temp sensor in side of vessel, thermowell with DS18B20 Sensor
  
 Mash Tun.
  * 60L Square Esky (Building 70L Stainless mashtun currently)
  * Recirculation via March Pump
  * RIMS tube with 2400watt element
- * Solid State Relay for Element control.
- * Thermowell in side of mashtun (DS18B20 Sensor)
+ * 30a @ 250v Mechanical Relay for Element control.
+ * Thermowell in side of mashtun (DS18B20 Sensor inside Thermowell)
  * Thermowell in RIMS tube after element
  
 Kettle
