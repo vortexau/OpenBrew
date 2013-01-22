@@ -3,10 +3,13 @@ OpenBrew. Software for Linux and UNIX-like OS for controlling a Brewery.
 I've designed and written this software to suit /my/ brewery, however I aim to keep it extensible enough for modifications to suit larger breweries and installations.
 
 My Brewery:
+
+Control Hardware & Software:
 SBC which controls the brewery: BeagleBone board; ARM CPU.
 30a @ 250v Mechanical Relay Board, 8 relays: http://www.ereshop.com/shop/i2c-bus-heavy-current-relay-12v-pcf8574-p-771.html
 Software is all C/C++.
 Trying to keep it as free as possible, avoiding BOOST if I can (though that may be foolish).
+PID Temperature control (yet to be implemented)
 
 HLT:
  * 2400watt element for heating water
