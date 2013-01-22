@@ -10,6 +10,7 @@ SBC which controls the brewery: BeagleBone board; ARM CPU.
 Software is all C/C++.
 Trying to keep it as free as possible, avoiding BOOST if I can (though that may be foolish).
 PID Temperature control (yet to be implemented)
+NO PYTHON! 
 
 HLT:
  * 2400watt element for heating water
