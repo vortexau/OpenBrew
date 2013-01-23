@@ -81,7 +81,10 @@ int Batch::parseRecipe() {
     try {
 
         pugi::xml_document doc;
-        if (!doc.load_file(getRecipeFullPath())) return -1;
+        
+        if (!doc.load_file(getRecipeFullPath())) {
+            return -1;
+        }
 
         pugi::xml_node recipe_name = doc.child("RECIPES").child("RECIPE").child("NAME");
 
