@@ -65,6 +65,7 @@ Batch::Batch() {
 
 int Batch::parseRecipe() {
 
+    int i;
     string recipeCorrect;
     string yesLower;
     string yesUpper;
@@ -95,6 +96,7 @@ int Batch::parseRecipe() {
         pugi::xml_node mash_steps = doc.child("RECIPES").child("RECIPE").child("MASH").child("MASH_STEPS");
 
         // add the mash steps to the batch
+        i = 0;
         for (pugi::xml_node step = mash_steps.child("MASH_STEP"); step; step = step.next_sibling("MASH_STEP")) {
 
             // Get some details of this step from the recipe.
@@ -106,10 +108,10 @@ int Batch::parseRecipe() {
             cout << "Step Name: '" << stepName << "'. Temp: " << stepTemp << "c for " << stepLength << " minutes" << endl;
 
             // for the 'mash in' step add a step to the HLT for the mash-in temp.
-            if(stepName == "Mash In") { // rather than use the 'mash in' step, should we use the 'first' element as the mash-in temp? probably.
+            if(i == 0) { // rather than use the 'mash in' step, should we use the 'first' element as the mash-in temp? probably.
                 // get the 'dough in' temp, add a step for HLT using this temp
 
-                cout << "Mash In step found. Adding Mash-In temp as HLT step" << endl;
+                cout << "Dough In step found. Adding Dough-In temp as HLT step" << endl;
 
                 int thisVessel = VESSEL_HLT;
 
@@ -153,6 +155,7 @@ int Batch::parseRecipe() {
 
             this->addStep(thisStep);
 
+            i++;
         }
 
         // Add the boil step
