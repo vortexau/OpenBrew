@@ -26,6 +26,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <syslog.h>
 
 #include "../defines.h"
 #include "runBatch.h"
@@ -78,7 +79,10 @@ void runBatch::run(Batch batch) {
 void runBatch::runSteps(Vessel vessel) {
 
     int numSteps = vessel.getNumSteps();
-    //int i;
+
+    string vessel_name = vessel.getVesselName();
+
+    syslog(LOG_INFO, "%s: Vessel Thread starting up. ", vessel_name.c_str());
 
     cout << "Processing ";
     cout << vessel.getVesselName();
@@ -100,23 +104,60 @@ void runBatch::runSteps(Vessel vessel) {
 
         Step thisStep = steps[i];
 
-        cout << "Vessel: " << vessel.getVesselName() << endl;
-        cout << "Running step name '" << thisStep.getStepName() << "'" << endl;
-        cout << "Step will run for " << thisStep.getStepLength() << " minutes" << endl;
+        string step_name = thisStep.getStepName();
+
+
+        string vessel_name_v    = "%s: Vessel: %s";
+        syslog(LOG_INFO, vessel_name.c_str(), vessel_name.c_str(), vessel_name.c_str());
+
+        string vessel_step      = "%s: Running step name '%s'";
+        syslog(LOG_INFO, vessel_step.c_str(), vessel_name.c_str(), step_name.c_str());
+
+        string vessel_step_time = "%s: Step will run for %d minutes";
+        syslog(LOG_INFO, vessel_step_time.c_str(), vessel_name.c_str(), thisStep.getStepLength());
 
 
         thisStep.stepActions();
 
-        sleep(10);
+        // get the time for this step, in minutes.
+        // convert the step time to seconds
+        int stepTimeSeconds = thisStep.getStepLength() * 60;
 
-        cout << "Vessel: " << vessel.getVesselName() << endl;
-        cout << "Step: '" << thisStep.getStepName() << "' step is complete. Proceeding to next step" << endl;
+
+        if(stepTimeSeconds == 0) {
+        	syslog(LOG_INFO, "%s: No time specified. Temp step.", vessel_name.c_str());
+        	// No specified time. So.. it's probably a 'temp' target
+        	// like for the HLT. So, we'll need to wait until it's at temp.
+
+        	// For now, eh. We'll just wait 10 mins.
+        	sleep(10 * 60);
+
+        } else {
+
+        	syslog(LOG_INFO, "%s: Starting step timer.", vessel_name.c_str());
+
+			while(stepTimeSeconds > 0) {
+
+				sleep(1);
+				stepTimeSeconds--;
+			}
+
+			syslog(LOG_INFO, "%s: Step timer complete.", vessel_name.c_str());
+
+        }
+
+        string vessel_step_ending = "%s: Step: '%s' step is complete. Proceeding to next step";
+        syslog(LOG_INFO, vessel_step_ending.c_str(), vessel_name.c_str(), step_name.c_str());
+
+        cout << vessel_step_ending << endl;
         cout << endl;
         cout << "------------------" << endl;
         cout << endl;
 
 
     }
+
+    syslog(LOG_INFO, "%s Thread ending.", vessel_name.c_str());
 }
 
 runBatch::~runBatch() {

@@ -22,6 +22,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <syslog.h>
 
 #include "defines.h"
 
@@ -33,6 +34,11 @@ using namespace std;
 
 int main ()
 {
+
+	// Syslog
+	openlog("openbrew", LOG_PID|LOG_CONS, LOG_USER);
+
+	syslog(LOG_INFO, "OpenBrew. Starting up. ");
 
 	// This looks a bit funky because the slashes all need to be escaped.
 	cout << "-------------------------------------------------  " << endl;
@@ -78,5 +84,9 @@ int main ()
 //      // can we call some kind of CLI function here?
 //    }
 
+
+    syslog(LOG_INFO, "OpenBrew. Shutting down. Thanks for brewing with OpenBrew! ");
+
+    closelog();
     return 0;
 }

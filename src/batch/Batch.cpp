@@ -270,9 +270,9 @@ void Batch::run() {
 
     }
 
-    for(;;) {
-        // loop
-    }
+//    for(;;) {
+//        // loop
+//    }
 
 //    batch.runSteps(getVessel(VESSEL_HLT));
 //    batch.runSteps(getVessel(VESSEL_MLT));

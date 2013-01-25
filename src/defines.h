@@ -58,19 +58,20 @@
 #define VESSEL_MLT 		2
 #define VESSEL_KETTLE 	3
 
-#define RELAY_BOARD_I2C_ADDR 0x20
+#define RELAY_BOARD_1_ADDR 0x20
+#define SEVENSEG_HLT_DISP  0x70
+#define SEVENSEG_MLT_DISP  0x71
 
-#define BROWN_PUMP_RELAY_ADDR 	    "/sys/i2c/1234/something"
-#define MARCH_PUMP_ONE_RELAY_ADDR   "/sys/i2c/2343/something"
-#define MARCH_PUMP_TWO_RELAY_ADDR   "/sys/i2c/8763/something"
-#define MARCH_PUMP_THREE_RELAY_ADDR "/sys/i2c/4234/something"
+#define RELAY_ON    1
+#define RELAY_OFF   0
 
-#define HLT_ELEMENT_RELAY_ADDR   "/sys/i2c/7642/something"
-#define MLT_ELEMENT_RELAY_ADDR   "/sys/i2c/3423/something"
-#define HERMS_ELEMENT_RELAY_ADDR "/sys/i2c/8733/something"
-
-// that might be wrong. the jaycar i2c relay board may only present as a single device/path,
-// we might need to send the bitwise codes to that single device to enable/disable the
-// relays as required...
+#define RELAY_BOARD_1_8     0
+#define RELAY_BOARD_1_7     1
+#define RELAY_BOARD_1_6     2
+#define RELAY_BOARD_1_5     3
+#define RELAY_BOARD_1_4     4
+#define RELAY_BOARD_1_3     5
+#define RELAY_BOARD_1_2     6
+#define RELAY_BOARD_1_1     7
 
 #endif /* DEFINES_H_ */
