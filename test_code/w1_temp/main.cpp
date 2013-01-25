@@ -63,6 +63,10 @@ int main() {
 			                (std::istreambuf_iterator<char>()    ) );
 
 			cout << content << endl;
+
+			// loop through the lines of the file here.
+			// We know the first 26 chars are the sensor address.
+
 			cout << "------------" << endl;
 
 		}
