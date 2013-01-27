@@ -64,16 +64,27 @@ int main() {
 
 	// Then to use his example:
 
+//	// send 0x71 // = F
+//	displaybuffer[0] = 0x71;
+//	// send 0x3E // = U
+//	displaybuffer[1] = 0x3E;
+//	// send 0x00 // = colon off
+//	displaybuffer[2] = 0x00;
+//	// send 0x79 // = E
+//	displaybuffer[3] = 0x79;
+//	// send 0x38 // = L
+//	displaybuffer[4] = 0x38;
+
 	// send 0x71 // = F
-	displaybuffer[0] = 0x71;
+	displaybuffer[0] = 0x3F; // 0
 	// send 0x3E // = U
-	displaybuffer[1] = 0x3E;
+	displaybuffer[1] = 0x06; // 1
 	// send 0x00 // = colon off
 	displaybuffer[2] = 0x00;
 	// send 0x79 // = E
-	displaybuffer[3] = 0x79;
+	displaybuffer[3] = 0x5B; // 2
 	// send 0x38 // = L
-	displaybuffer[4] = 0x38;
+	displaybuffer[4] = 0x4F; // 3
 	
 		// send 0x21 - start the oscillator
 	i2c_smbus_write_byte(file, 0x21);
