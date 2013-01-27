@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <stdint.h>
 #include "i2c-dev.h"
 
 using namespace std;
