@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define SEVEN_SEG_LCD_1 0x70 //30a Relay Board
+#define SEVEN_SEG_LCD_0 0x70 //30a Relay Board
 #define SEVEN_SEG_LCD_1 0x71 //30a Relay Board
 
 static const uint8_t numbertable[] = {
