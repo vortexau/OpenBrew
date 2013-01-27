@@ -54,15 +54,6 @@ void main() {
 	// http://forums.adafruit.com/viewtopic.php?f=47&t=29897#p156582
 
 	// Process of writing to the display.
-	
-	// send 0x21 - start the oscillator
-	i2c_smbus_write_byte(file, 0x21);
-	
-	// send 0xEF - set brightness to max (not really required, but a bit of a sanity check).
-	i2c_smbus_write_byte(file, 0xEF);
-	
-	// send 0x81 - turn blink off and display on
-	i2c_smbus_write_byte(file, 0x81);
 
 	// Then to use his example:
 
@@ -76,6 +67,15 @@ void main() {
 	displaybuffer[3] = 0x79;
 	// send 0x38 // = L
 	displaybuffer[4] = 0x38;
+	
+		// send 0x21 - start the oscillator
+	i2c_smbus_write_byte(file, 0x21);
+	
+	// send 0xEF - set brightness to max (not really required, but a bit of a sanity check).
+	i2c_smbus_write_byte(file, 0xEF);
+	
+	// send 0x81 - turn blink off and display on
+	i2c_smbus_write_byte(file, 0x81);
 	
 	i2c_smbus_write_byte(file, 0x00); // Starting RAM address. Required.
 	
