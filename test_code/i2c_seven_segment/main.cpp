@@ -86,15 +86,18 @@ int main() {
 	// send 0x38 // = L
 	displaybuffer[4] = 0x4F; // 3
 	
-		// send 0x21 - start the oscillator
+	// send 0x21 - start the oscillator
 	i2c_smbus_write_byte(file, 0x21);
 	
-	// send 0xEF - set brightness to max (not really required, but a bit of a sanity check).
-	i2c_smbus_write_byte(file, 0xEF);
-	
 	// send 0x81 - turn blink off and display on
-	i2c_smbus_write_byte(file, 0x81);
+//	i2c_smbus_write_byte(file, 0x81);
+	// Hex is BLINK_CMD, DISPLAY_ON, BLINK_OFF
+	i2c_smbus_write_byte(file, 0x80 | 0x01 | (0 << 1));
 	
+	// send 0xEF - set brightness to max (not really required, but a bit of a sanity check).
+	i2c_smbus_write_byte(file, 0xE0 | 15);
+
+
 	i2c_smbus_write_byte(file, 0x00); // Starting RAM address. Required.
 	
 	// loop through the displaybuffer and write the bytes.
