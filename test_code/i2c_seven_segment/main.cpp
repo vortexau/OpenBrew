@@ -93,7 +93,7 @@ int main() {
 
 
 
-	i2c_smbus_write_byte(file, state);
+//	i2c_smbus_write_byte(file, state);
 
 	close(file);
 
