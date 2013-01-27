@@ -10,6 +10,10 @@
 #include <unistd.h>
 #include "i2c-dev.h"
 
+using namespace std;
+
+#define SEVEN_SEG_LCD_1 0x20 //30a Relay Board
+
 static const uint8_t numbertable[] = {
 	0x3F, /* 0 */
 	0x06, /* 1 */
@@ -31,8 +35,9 @@ static const uint8_t numbertable[] = {
 
 uint16_t displaybuffer[8];
 
-void main() {
+int main() {
 
+	int file;
 
 	// BeagleBone specific I2C bus
 	if ((file = open("/dev/i2c-3", O_RDWR)) < 0) {
@@ -40,8 +45,8 @@ void main() {
 		return (1);
 	}
 
-	if (ioctl(file, I2C_SLAVE, RELAY_BOARD) < 0) {
-		cout << "I2C_SLAVE address " << RELAY_BOARD << " failed..." << endl;
+	if (ioctl(file, I2C_SLAVE, SEVEN_SEG_LCD_1) < 0) {
+		cout << "I2C_SLAVE address " << SEVEN_SEG_LCD_1 << " failed..." << endl;
 		return (2);
 	}
 
