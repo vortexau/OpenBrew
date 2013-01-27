@@ -100,11 +100,13 @@ int main() {
 
 	i2c_smbus_write_byte(file, 0x00); // Starting RAM address. Required.
 	
+
+
 	// loop through the displaybuffer and write the bytes.
-	for (uint8_t i=0; i<8; i++) {
-    		//Wire.write(displaybuffer[i] & 0xFF);    
-    		i2c_smbus_write_byte(file, displaybuffer[i]);
- 	}
+//	for (uint8_t i=0; i<8; i++) {
+//    		//Wire.write(displaybuffer[i] & 0xFF);
+//    		i2c_smbus_write_byte(file, displaybuffer[i]);
+// 	}
 
 
 
