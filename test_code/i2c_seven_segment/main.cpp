@@ -29,6 +29,8 @@ static const uint8_t numbertable[] = {
 	0x71, /* F */
 };
 
+uint16_t displaybuffer[8];
+
 void main() {
 
 
@@ -45,16 +47,46 @@ void main() {
 
 	//state = PCF8574.read(addr);
 	// Read the current state fo the relay board.
-	int state = i2c_smbus_read_byte(file);
+	//int state = i2c_smbus_read_byte(file);
 
-	// Using bitwise, add or subtract the relay you wish to turn on or off.
-	if (x == RELAY_ON) {
-		state &= pin_array[0][pin];
-	} else if (x == RELAY_OFF) {
-		state |= pin_array[1][pin];
-	}
+	// Build a string to send to the 7segment display.
+	// Awesome overview on how to build characters for the 7seg display here:
+	// http://forums.adafruit.com/viewtopic.php?f=47&t=29897#p156582
 
-	//PCF8574.write(addr, state);       // ON
+	// Process of writing to the display.
+	
+	// send 0x21 - start the oscillator
+	i2c_smbus_write_byte(file, 0x21);
+	
+	// send 0xEF - set brightness to max (not really required, but a bit of a sanity check).
+	i2c_smbus_write_byte(file, 0xEF);
+	
+	// send 0x81 - turn blink off and display on
+	i2c_smbus_write_byte(file, 0x81);
+
+	// Then to use his example:
+
+	// send 0x71 // = F
+	displaybuffer[0] = 0x71;
+	// send 0x3E // = U
+	displaybuffer[1] = 0x3E;
+	// send 0x00 // = colon off
+	displaybuffer[2] = 0x00;
+	// send 0x79 // = E
+	displaybuffer[3] = 0x79;
+	// send 0x38 // = L
+	displaybuffer[4] = 0x38;
+	
+	i2c_smbus_write_byte(file, 0x00); // Starting RAM address. Required.
+	
+	// loop through the displaybuffer and write the bytes.
+	for (uint8_t i=0; i<8; i++) {
+    		//Wire.write(displaybuffer[i] & 0xFF);    
+    		i2c_smbus_write_byte(file, displaybuffer[i]);
+ 	}
+
+
+
 	i2c_smbus_write_byte(file, state);
 
 	close(file);
