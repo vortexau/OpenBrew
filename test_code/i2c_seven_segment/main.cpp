@@ -13,27 +13,7 @@
 
 using namespace std;
 
-#define SEVEN_SEG_LCD_0 0x70 //30a Relay Board
 #define SEVEN_SEG_LCD_1 0x71 //30a Relay Board
-
-static const uint8_t numbertable[] = {
-	0x3F, /* 0 */
-	0x06, /* 1 */
-	0x5B, /* 2 */
-	0x4F, /* 3 */
-	0x66, /* 4 */
-	0x6D, /* 5 */
-	0x7D, /* 6 */
-	0x07, /* 7 */
-	0x7F, /* 8 */
-	0x6F, /* 9 */
-	0x77, /* a */
-	0x7C, /* b */
-	0x39, /* C */
-	0x5E, /* d */
-	0x79, /* E */
-	0x71, /* F */
-};
 
 uint16_t displaybuffer[8];
 int file;
@@ -90,7 +70,7 @@ void sendCharacters() {
 
 	cout << "Second numbers" << endl;
 
-	displaybuffer[0] = 0x7C; // B
+	displaybuffer[0] = 0x7C; // b
 	displaybuffer[1] = 0x79; // E
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x79; // E
