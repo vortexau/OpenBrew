@@ -49,9 +49,9 @@ void initDisplay();
 
 int main() {
 
-	startOscillator();
-	displayOnBlinkOff();
-	setBrightness();
+//	startOscillator();
+//	displayOnBlinkOff();
+//	setBrightness();
 	initDisplay();
 	sendCharacters();
 
