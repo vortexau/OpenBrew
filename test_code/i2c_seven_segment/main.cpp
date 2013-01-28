@@ -109,7 +109,7 @@ void sendCharacters() {
 
 	beginTransmission();
 
-//	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
+	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
