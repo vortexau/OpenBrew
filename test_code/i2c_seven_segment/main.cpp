@@ -108,6 +108,7 @@ void sendCharacters() {
 	for (uint8_t i=0; i<8; i++) {
 		//Wire.write(displaybuffer[i] & 0xFF);
 		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
+		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
 	}
 
 	endTransmission();
