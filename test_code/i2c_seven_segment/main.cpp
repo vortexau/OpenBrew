@@ -111,21 +111,25 @@ void sendCharacters() {
 
 	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
+	cout << "First numbers " << endl;
+
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
 
-	for (uint8_t i=0; i<8; i++) {
-		//Wire.write(displaybuffer[i] & 0xFF);
+	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
-//		displaybuffer[i] = displaybuffer[i] & 0xFF;
-//		displaybuffer[i] = displaybuffer[i] >> 8;
+	sleep(4);
 
-//		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
-//		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
-	}
+	cout << "Second numbers" << endl;
+
+	displaybuffer[0] = 0x7C; // B
+	displaybuffer[1] = 0x79; // E
+	displaybuffer[2] = 0x00; // colon off
+	displaybuffer[3] = 0x79; // E
+	displaybuffer[4] = 0x71; // F
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
