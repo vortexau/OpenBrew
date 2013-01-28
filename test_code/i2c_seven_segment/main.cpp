@@ -97,6 +97,8 @@ void sendCharacters() {
 
 	beginTransmission();
 
+	i2c_smbus_write_byte(file, 0x00);
+
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
 	displaybuffer[2] = 0x00; // colon off
