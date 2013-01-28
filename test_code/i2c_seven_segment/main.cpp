@@ -22,6 +22,25 @@ int beginTransmission();
 void endTransmission();
 void sendCharacters();
 
+static const uint8_t numbertable[] = {
+	0x3F, /* 0 */
+	0x06, /* 1 */
+	0x5B, /* 2 */
+	0x4F, /* 3 */
+	0x66, /* 4 */
+	0x6D, /* 5 */
+	0x7D, /* 6 */
+	0x07, /* 7 */
+	0x7F, /* 8 */
+	0x6F, /* 9 */
+	0x77, /* a */
+	0x7C, /* b */
+	0x39, /* C */
+	0x5E, /* d */
+	0x79, /* E */
+	0x71, /* F */
+};
+
 int main() {
 	sendCharacters();
 }
@@ -77,6 +96,25 @@ void sendCharacters() {
 	displaybuffer[4] = 0x71; // F
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+	sleep(4);
+
+	displaybuffer[0] = 0x00; // b
+	displaybuffer[1] = 0x00; // E
+	displaybuffer[2] = 0x00; // colon off
+	displaybuffer[3] = 0x00; // E
+	displaybuffer[4] = 0x00; // F
+
+	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+	for (uint8_t i=0; i<15; i++) {
+
+		displaybuffer[0] = numbertable[i];
+
+		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+		sleep(2);
+	}
 
 	endTransmission();
 }
