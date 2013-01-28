@@ -44,13 +44,15 @@ void startOscillator();
 void displayOnBlinkOff();
 void setBrightness();
 void sendCharacters();
+void initDisplay();
 
 
 int main() {
 
-	startOscillator();
-	displayOnBlinkOff();
-	setBrightness();
+//	startOscillator();
+//	displayOnBlinkOff();
+//	setBrightness();
+	initDisplay();
 	sendCharacters();
 
 }
@@ -90,6 +92,14 @@ void displayOnBlinkOff() {
 void setBrightness() {
 	beginTransmission();
 	i2c_smbus_write_byte(file, 0xE0 | 15);
+	endTransmission();
+}
+
+void initDisplay() {
+	beginTransmission();
+	i2c_smbus_write_byte(file, 0x21); // start oscillator
+	i2c_smbus_write_byte(file, 0x80 | 0x01 | (0 << 1)); // display on, blink off
+	i2c_smbus_write_byte(file, 0xE0 | 15); // set brightness to max
 	endTransmission();
 }
 
