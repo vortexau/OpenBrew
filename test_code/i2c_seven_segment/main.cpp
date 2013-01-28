@@ -113,7 +113,7 @@ void sendCharacters() {
 
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
-//	displaybuffer[2] = 0x00; // colon off
+	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
 
@@ -127,7 +127,7 @@ void sendCharacters() {
 		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
 	}
 
-//	i2c_smbus_write_i2c_block_data(file, 0x00, 16, (__u8 *)displaybuffer);
+	i2c_smbus_write_i2c_block_data(file, 0x00, displaybuffer.length(), (__u8 *)displaybuffer);
 
 	endTransmission();
 }
