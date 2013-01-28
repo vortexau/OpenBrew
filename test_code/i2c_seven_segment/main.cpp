@@ -113,9 +113,9 @@ void sendCharacters() {
 
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
-//	displaybuffer[2] = 0x00; // colon off
-	displaybuffer[2] = 0x5B; // 2
-	displaybuffer[3] = 0x4F; // 3
+	displaybuffer[2] = 0x00; // colon off
+	displaybuffer[3] = 0x5B; // 2
+	displaybuffer[4] = 0x4F; // 3
 
 	for (uint8_t i=0; i<8; i++) {
 		//Wire.write(displaybuffer[i] & 0xFF);
