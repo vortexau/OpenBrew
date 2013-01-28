@@ -127,7 +127,7 @@ void sendCharacters() {
 //		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
 
 		i2c_smbus_write_byte(file, displaybuffer[i]);
-		i2c_smbus_write_byte(file, displaybuffer[i]);
+//		i2c_smbus_write_byte(file, displaybuffer[i]);
 
 	}
 
