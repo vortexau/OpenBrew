@@ -107,7 +107,7 @@ void sendCharacters() {
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
-	for (uint8_t i=0; i<15; i++) {
+	for (uint8_t i=0; i<16; i++) {
 
 		displaybuffer[0] = numbertable[i];
 
