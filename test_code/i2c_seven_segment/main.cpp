@@ -55,8 +55,6 @@ int main() {
 	initDisplay();
 	sendCharacters();
 
-	sleep(5);
-
 }
 
 int beginTransmission() {
@@ -113,7 +111,7 @@ void sendCharacters() {
 
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
-	displaybuffer[2] = 0x00; // colon off
+//	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
 
@@ -123,12 +121,8 @@ void sendCharacters() {
 //		displaybuffer[i] = displaybuffer[i] & 0xFF;
 //		displaybuffer[i] = displaybuffer[i] >> 8;
 
-//		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
-//		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
-
-		i2c_smbus_write_byte(file, displaybuffer[i]);
-//		i2c_smbus_write_byte(file, displaybuffer[i]);
-
+		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
+		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
 	}
 
 //	i2c_smbus_write_i2c_block_data(file, 0x00, 16, (__u8 *)displaybuffer);
