@@ -123,8 +123,8 @@ void sendCharacters() {
 //		displaybuffer[i] = displaybuffer[i] & 0xFF;
 //		displaybuffer[i] = displaybuffer[i] >> 8;
 
-		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
-		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
+//		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
+//		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
 	}
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
