@@ -52,7 +52,7 @@ int main() {
 //	startOscillator();
 //	displayOnBlinkOff();
 //	setBrightness();
-	initDisplay();
+//	initDisplay();
 	sendCharacters();
 
 }
@@ -107,7 +107,7 @@ void sendCharacters() {
 
 	beginTransmission();
 
-	i2c_smbus_write_byte(file, 0x00);
+	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
 	displaybuffer[0] = 0x3F; // 0
 	displaybuffer[1] = 0x06; // 1
@@ -115,11 +115,15 @@ void sendCharacters() {
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
 
-	for (uint8_t i=0; i<8; i++) {
+//	for (uint8_t i=0; i<8; i++) {
 		//Wire.write(displaybuffer[i] & 0xFF);
-		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
-		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
-	}
+
+
+//		i2c_smbus_write_byte(file, displaybuffer[i] & 0xFF);
+//		i2c_smbus_write_byte(file, displaybuffer[i] >> 8);
+//	}
+
+	i2c_smbus_write_i2c_block_data(file, 0x00, 16,  (__u8 *)displaybuffer);
 
 	endTransmission();
 }
