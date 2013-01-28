@@ -40,21 +40,10 @@ int file;
 
 int beginTransmission();
 void endTransmission();
-void startOscillator();
-void displayOnBlinkOff();
-void setBrightness();
 void sendCharacters();
-void initDisplay();
-
 
 int main() {
-
-//	startOscillator();
-//	displayOnBlinkOff();
-//	setBrightness();
-//	initDisplay();
 	sendCharacters();
-
 }
 
 int beginTransmission() {
@@ -75,30 +64,6 @@ int beginTransmission() {
 
 void endTransmission() {
 	close(file);
-}
-
-void startOscillator() {
-	beginTransmission();
-	i2c_smbus_write_byte(file, 0x21);
-	endTransmission();
-}
-
-void displayOnBlinkOff() {
-	beginTransmission();
-	i2c_smbus_write_byte(file, 0x80 | 0x01 | (0 << 1));
-	endTransmission();
-}
-
-void setBrightness() {
-	beginTransmission();
-	i2c_smbus_write_byte(file, 0xE0 | 15);
-	endTransmission();
-}
-
-void initDisplay() {
-	beginTransmission();
-
-	endTransmission();
 }
 
 void sendCharacters() {
