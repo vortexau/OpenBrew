@@ -55,6 +55,8 @@ int main() {
 	initDisplay();
 	sendCharacters();
 
+	sleep(5);
+
 }
 
 int beginTransmission() {
