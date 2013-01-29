@@ -140,10 +140,25 @@ void sendCharacters() {
 
 			sleep(1);
 
-			displaybuffer[0] = 0x00;
+			displaybuffer[0] = 0x08;
 			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 			sleep(1);
+
+			displaybuffer[0] = 0x10;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+			sleep(1);
+
+			displaybuffer[0] = 0x20;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+			sleep(1);
+
+//			displaybuffer[0] = 0x00;
+//			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+//
+//			sleep(1);
 
 	}
 
