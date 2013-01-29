@@ -69,7 +69,7 @@ void sendCharacters() {
 
 	beginTransmission();
 
-	i2c_smbus_write_byte(file, 0x21); // start oscillator
+	i2c_smbus_write_byte(file, 0x20); // start oscillator
 	i2c_smbus_write_byte(file, 0x81); // display on, blink off
 	i2c_smbus_write_byte(file, 0xEF); // set brightness to max
 
@@ -122,6 +122,8 @@ void sendCharacters() {
 
 	// junk to loop around the edges. why not.
 
+
+
 	for(;;) {
 
 		// length 8 works best so far.
@@ -133,7 +135,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x01;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 		displaybuffer[0] = 0x02;
 		displaybuffer[1] = 0x02;
@@ -142,7 +144,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x02;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 		displaybuffer[0] = 0x04;
 		displaybuffer[1] = 0x04;
@@ -151,7 +153,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x04;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 		displaybuffer[0] = 0x08;
 		displaybuffer[1] = 0x08;
@@ -160,7 +162,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x08;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 		displaybuffer[0] = 0x10;
 		displaybuffer[1] = 0x10;
@@ -169,7 +171,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x10;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 		displaybuffer[0] = 0x20;
 		displaybuffer[1] = 0x20;
@@ -178,7 +180,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x20;
 		i2c_smbus_write_i2c_block_data(file, 0x00, 7, (__u8 *)displaybuffer);
 
-		usleep(500);
+		usleep(400);
 
 	}
 
