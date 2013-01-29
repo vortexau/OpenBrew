@@ -15,7 +15,7 @@ using namespace std;
 
 #define SEVEN_SEG_LCD_1 0x71 //30a Relay Board
 
-uint16_t displaybuffer[8];
+uint16_t displaybuffer[5];
 int file;
 
 int beginTransmission();
@@ -82,9 +82,6 @@ void sendCharacters() {
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
-	displaybuffer[5] = 0x00; // 3
-	displaybuffer[6] = 0x00; // 3
-	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
@@ -97,9 +94,6 @@ void sendCharacters() {
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x79; // E
 	displaybuffer[4] = 0x71; // F
-	displaybuffer[5] = 0x00; // 3
-	displaybuffer[6] = 0x00; // 3
-	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
@@ -110,9 +104,6 @@ void sendCharacters() {
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x00; // clear
 	displaybuffer[4] = 0x00; // clear
-	displaybuffer[5] = 0x00; // 3
-	displaybuffer[6] = 0x00; // 3
-	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
@@ -123,6 +114,21 @@ void sendCharacters() {
 		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 		sleep(1);
+	}
+
+	// junk to loop around the edges. why not.
+
+	for(;;) {
+
+		for(int i; i < 6; i++) {
+
+			displaybuffer[0] = 0x01;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+			displaybuffer[0] = 0x00;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+		}
+
 	}
 
 	endTransmission();
