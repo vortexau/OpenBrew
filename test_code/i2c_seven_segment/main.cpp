@@ -88,7 +88,7 @@ void sendCharacters() {
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
-	sleep(4);
+	sleep(1);
 
 	cout << "Second numbers" << endl;
 
@@ -103,7 +103,7 @@ void sendCharacters() {
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
-	sleep(4);
+	sleep(1);
 
 	displaybuffer[0] = 0x00; // clear
 	displaybuffer[1] = 0x00; // clear
@@ -122,7 +122,7 @@ void sendCharacters() {
 
 		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
-		sleep(2);
+		sleep(1);
 	}
 
 	endTransmission();
