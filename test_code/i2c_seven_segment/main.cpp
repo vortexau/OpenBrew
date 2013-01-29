@@ -126,6 +126,11 @@ void sendCharacters() {
 
 			sleep(1);
 
+			displaybuffer[0] = 0x02;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+			sleep(1);
+
 			displaybuffer[0] = 0x00;
 			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
