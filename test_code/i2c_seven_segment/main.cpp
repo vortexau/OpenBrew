@@ -75,6 +75,8 @@ void sendCharacters() {
 
 	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
+
+	/*
 	cout << "First numbers " << endl;
 
 	displaybuffer[0] = 0x3F; // 0
@@ -116,6 +118,8 @@ void sendCharacters() {
 		sleep(1);
 	}
 
+	*/
+
 	// junk to loop around the edges. why not.
 
 	for(;;) {
@@ -127,6 +131,11 @@ void sendCharacters() {
 			sleep(1);
 
 			displaybuffer[0] = 0x02;
+			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+			sleep(1);
+
+			displaybuffer[0] = 0x03;
 			i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 			sleep(1);
