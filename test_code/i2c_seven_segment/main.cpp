@@ -82,6 +82,9 @@ void sendCharacters() {
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
+	displaybuffer[5] = 0x00; // 3
+	displaybuffer[6] = 0x00; // 3
+	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
@@ -94,16 +97,22 @@ void sendCharacters() {
 	displaybuffer[2] = 0x00; // colon off
 	displaybuffer[3] = 0x79; // E
 	displaybuffer[4] = 0x71; // F
+	displaybuffer[5] = 0x00; // 3
+	displaybuffer[6] = 0x00; // 3
+	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 	sleep(4);
 
-	displaybuffer[0] = 0x00; // b
-	displaybuffer[1] = 0x00; // E
+	displaybuffer[0] = 0x00; // clear
+	displaybuffer[1] = 0x00; // clear
 	displaybuffer[2] = 0x00; // colon off
-	displaybuffer[3] = 0x00; // E
-	displaybuffer[4] = 0x00; // F
+	displaybuffer[3] = 0x00; // clear
+	displaybuffer[4] = 0x00; // clear
+	displaybuffer[5] = 0x00; // 3
+	displaybuffer[6] = 0x00; // 3
+	displaybuffer[7] = 0x00; // 3
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
