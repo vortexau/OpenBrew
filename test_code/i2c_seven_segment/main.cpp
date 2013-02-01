@@ -131,6 +131,9 @@ void sendCharacters() {
 	displaybuffer[7] = 0x00;
 	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
+
+	sleep(5);
+
 	for(;;) {
 
 		// length 8 works best so far.
