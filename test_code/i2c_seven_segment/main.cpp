@@ -135,10 +135,32 @@ void sendCharacters() {
 		displaybuffer[6] = 0x01;
 		displaybuffer[7] = 0x01;
 
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+		if(write(file, displaybuffer, 8) != 3) {
+			cout << "error with the write" << endl;
+		}
+
+		// i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 		usleep(400);
 
+		cout << "loop" << endl;
+
+
+		/*
+
+		displaybuffer[0] = 0x01;
+		displaybuffer[1] = 0x01;
+		displaybuffer[2] = 0x00; // colon.
+		displaybuffer[3] = 0x01;
+		displaybuffer[4] = 0x01;
+		displaybuffer[5] = 0x01;
+		displaybuffer[6] = 0x01;
+		displaybuffer[7] = 0x01;
+
+		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+
+		usleep(400);
 		displaybuffer[0] = 0x02;
 		displaybuffer[1] = 0x02;
 		displaybuffer[2] = 0x00; // colon.
@@ -198,6 +220,7 @@ void sendCharacters() {
 		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 		usleep(400);
+		*/
 
 	}
 
