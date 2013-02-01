@@ -136,7 +136,7 @@ void sendCharacters() {
 		displaybuffer[7] = 0x01;
 
 
-		if(write(file, displaybuffer, 8) != 3) {
+		if(write(file, displaybuffer, 8) != 8) {
 			cout << "error with the write" << endl;
 		}
 
