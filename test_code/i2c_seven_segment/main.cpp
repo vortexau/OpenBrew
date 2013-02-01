@@ -127,10 +127,10 @@ void sendCharacters() {
 		// length 8 works best so far.
 
 
-		displaybuffer[0] = 0x00;
+		displaybuffer[0] = 0x01;
 		displaybuffer[1] = 0x01;
-		displaybuffer[2] = 0x01;
-		displaybuffer[3] = 0x00; // colon.
+		displaybuffer[2] = 0x01; // colon.
+		displaybuffer[3] = 0x01;
 		displaybuffer[4] = 0x01;
 		displaybuffer[5] = 0x01;
 		displaybuffer[6] = 0x01;
