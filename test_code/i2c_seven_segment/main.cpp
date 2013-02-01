@@ -71,7 +71,7 @@ void sendCharacters() {
 
 	i2c_smbus_write_byte(file, 0x21); // start oscillator
 	i2c_smbus_write_byte(file, 0xEF); // set brightness to max
-	i2c_smbus_write_byte(file, 0x80); // display on, blink off
+	i2c_smbus_write_byte(file, 0x81); // display on, blink off
 
 	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
