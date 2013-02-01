@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define SEVEN_SEG_LCD_1 0x71 //30a Relay Board
+#define SEVEN_SEG_LCD_1 0x70 //30a Relay Board
 
 uint16_t displaybuffer[8];
 int file;
@@ -135,31 +135,7 @@ void sendCharacters() {
 		displaybuffer[6] = 0x01;
 		displaybuffer[7] = 0x01;
 
-		for (uint8_t i=0; i<8; i++) {
-			displaybuffer[i] = displaybuffer[i] & 0xFF;
-			displaybuffer[i] = displaybuffer[i] >> 8;
-
-			//i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
-			i2c_smbus_write_byte(file, displaybuffer[i]);
-		}
-
-		sleep(2);
-
-		displaybuffer[0] = 0x00;
-		displaybuffer[1] = 0x00;
-		displaybuffer[2] = 0x00; // colon.
-		displaybuffer[3] = 0x00;
-		displaybuffer[4] = 0x00;
-		displaybuffer[5] = 0x00;
-		displaybuffer[6] = 0x00;
-		displaybuffer[7] = 0x00;
-
 		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
-
-		sleep(2);
-
-		/*
-		//i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 		usleep(400);
 
@@ -222,7 +198,6 @@ void sendCharacters() {
 		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
 
 		usleep(400);
-		*/
 
 	}
 
