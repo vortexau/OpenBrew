@@ -39,6 +39,7 @@ static const uint8_t numbertable[] = {
 	0x5E, /* d */
 	0x79, /* E */
 	0x71, /* F */
+
 };
 
 int main() {
@@ -116,6 +117,15 @@ void sendCharacters() {
 		sleep(1);
 	}
 
+
+	// print Err
+	displaybuffer[0] = 0x79; // clear
+	displaybuffer[1] = 0x38; // clear
+	displaybuffer[2] = 0x00; // colon off
+	displaybuffer[3] = 0x38; // clear
+	displaybuffer[4] = 0x3F; // clear
+
+	i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
 	// junk to loop around the edges. why not.
 
