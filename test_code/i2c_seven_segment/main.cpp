@@ -126,7 +126,7 @@ void sendCharacters() {
 
 		displaybuffer[0] = 0x01;
 		displaybuffer[1] = 0x01;
-		displaybuffer[2] = 0xFF; // colon.
+		displaybuffer[2] = 0x00; // colon.
 		displaybuffer[3] = 0x01;
 		displaybuffer[4] = 0x01;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
@@ -135,7 +135,7 @@ void sendCharacters() {
 
 		displaybuffer[0] = 0x02;
 		displaybuffer[1] = 0x02;
-		displaybuffer[2] = 0xFF; // colon.
+		displaybuffer[2] = 0x00; // colon.
 		displaybuffer[3] = 0x02;
 		displaybuffer[4] = 0x02;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
