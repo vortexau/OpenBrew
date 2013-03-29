@@ -69,7 +69,7 @@ void sendCharacters() {
 
 	beginTransmission();
 
-	i2c_smbus_write_byte(file, 0x21); // start oscillator
+	i2c_smbus_write_byte(file, 0XE0 | 0x21); // start oscillator
 	i2c_smbus_write_byte(file, 0xE0 | 15); // set brightness to max
 	i2c_smbus_write_byte(file, 0x81); // display on, blink off
 
