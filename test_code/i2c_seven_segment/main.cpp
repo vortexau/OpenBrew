@@ -129,7 +129,7 @@ void sendCharacters() {
 
 		displaybuffer[0] = 0x01;
 		displaybuffer[1] = 0x01;
-		displaybuffer[2] = 0x01; // colon.
+		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x01;
 		displaybuffer[4] = 0x01;
 //		displaybuffer[5] = 0x01;
@@ -142,7 +142,7 @@ void sendCharacters() {
 
 		displaybuffer[0] = 0x02;
 		displaybuffer[1] = 0x02;
-		displaybuffer[2] = 0x01; // colon.
+		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x02;
 		displaybuffer[4] = 0x02;
 //		displaybuffer[5] = 0x02;
