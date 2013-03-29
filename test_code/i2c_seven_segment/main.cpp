@@ -75,7 +75,6 @@ void sendCharacters() {
 
 	i2c_smbus_write_byte(file, 0x00); // starting RAM Address
 
-	/*
 	cout << "First numbers " << endl;
 
 	displaybuffer[0] = 0x3F; // 0
@@ -84,7 +83,7 @@ void sendCharacters() {
 	displaybuffer[3] = 0x5B; // 2
 	displaybuffer[4] = 0x4F; // 3
 
-	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+	i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
 	sleep(1);
 
@@ -96,7 +95,7 @@ void sendCharacters() {
 	displaybuffer[3] = 0x79; // E
 	displaybuffer[4] = 0x71; // F
 
-	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+	i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
 	sleep(1);
 
@@ -106,22 +105,26 @@ void sendCharacters() {
 	displaybuffer[3] = 0x00; // clear
 	displaybuffer[4] = 0x00; // clear
 
-	i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+	i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
 	for (uint8_t i=0; i<16; i++) {
 
 		displaybuffer[0] = numbertable[i];
 
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
 		sleep(1);
 	}
 
-	*/
 
 	// junk to loop around the edges. why not.
 
 
+	/*
+	 * this all works as expected now.
+	 */
+
+	/*
 	for(;;) {
 
 		displaybuffer[0] = 0x01;
@@ -179,6 +182,7 @@ void sendCharacters() {
 		usleep(30000);
 
 	}
+	*/
 
 	endTransmission();
 }
