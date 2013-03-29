@@ -124,28 +124,23 @@ void sendCharacters() {
 
 	for(;;) {
 
-		// length 8 works best so far.
-
-
-//		displaybuffer[0] = 0x01;
-		displaybuffer[0] = 0x01 | 0x80; // add a decimal point to this one
-		displaybuffer[1] = 0x01 | 0x80; // add a decimal point to this one
+		displaybuffer[0] = 0x01;
+		displaybuffer[1] = 0x01;
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x01;
 		displaybuffer[4] = 0x01;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
-//		displaybuffer[0] = 0x02;
-		displaybuffer[0] = 0x02 | 0x80; // add a decimal point to this one
-		displaybuffer[1] = 0x02 | 0x80; // add a decimal point to this one
+		displaybuffer[0] = 0x02;
+		displaybuffer[1] = 0x02;
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x02;
 		displaybuffer[4] = 0x02;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
 		displaybuffer[0] = 0x04;
 		displaybuffer[1] = 0x04;
@@ -154,7 +149,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x04;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
 		displaybuffer[0] = 0x08;
 		displaybuffer[1] = 0x08;
@@ -163,7 +158,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x08;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
 		displaybuffer[0] = 0x10;
 		displaybuffer[1] = 0x10;
@@ -172,7 +167,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x10;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
 		displaybuffer[0] = 0x20;
 		displaybuffer[1] = 0x20;
@@ -181,7 +176,7 @@ void sendCharacters() {
 		displaybuffer[4] = 0x20;
 		i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
-		sleep(1);
+		usleep(400);
 
 	}
 
