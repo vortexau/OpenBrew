@@ -129,7 +129,7 @@ void sendCharacters() {
 
 //		displaybuffer[0] = 0x01;
 		displaybuffer[0] = 0x01 | 0x80; // add a decimal point to this one
-		displaybuffer[1] = 0x01;
+		displaybuffer[1] = 0x01 | 0x80; // add a decimal point to this one
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x01;
 		displaybuffer[4] = 0x01;
@@ -143,7 +143,7 @@ void sendCharacters() {
 
 //		displaybuffer[0] = 0x02;
 		displaybuffer[0] = 0x02 | 0x80; // add a decimal point to this one
-		displaybuffer[1] = 0x02;
+		displaybuffer[1] = 0x02 | 0x80; // add a decimal point to this one
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x02;
 		displaybuffer[4] = 0x02;
