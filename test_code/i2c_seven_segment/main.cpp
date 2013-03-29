@@ -137,7 +137,7 @@ void sendCharacters() {
 //		displaybuffer[6] = 0x01;
 //		displaybuffer[7] = 0x01;
 
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
@@ -150,7 +150,7 @@ void sendCharacters() {
 //		displaybuffer[5] = 0x02;
 //		displaybuffer[6] = 0x02;
 //		displaybuffer[7] = 0x02;
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
@@ -162,7 +162,7 @@ void sendCharacters() {
 //		displaybuffer[5] = 0x04;
 //		displaybuffer[6] = 0x04;
 //		displaybuffer[7] = 0x04;
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
@@ -174,7 +174,7 @@ void sendCharacters() {
 //		displaybuffer[5] = 0x08;
 //		displaybuffer[6] = 0x08;
 //		displaybuffer[7] = 0x08;
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
@@ -186,7 +186,7 @@ void sendCharacters() {
 //		displaybuffer[5] = 0x10;
 //		displaybuffer[6] = 0x10;
 //		displaybuffer[7] = 0x10;
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
@@ -198,7 +198,7 @@ void sendCharacters() {
 //		displaybuffer[5] = 0x20;
 //		displaybuffer[6] = 0x20;
 //		displaybuffer[7] = 0x20;
-		i2c_smbus_write_i2c_block_data(file, 0x00, 8, (__u8 *)displaybuffer);
+		i2c_smbus_write_i2c_block_data(file, 0x00, 5, (__u8 *)displaybuffer);
 
 		sleep(2);
 
