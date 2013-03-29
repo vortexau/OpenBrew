@@ -69,7 +69,7 @@ void sendCharacters() {
 
 	beginTransmission();
 
-	i2c_smbus_write_byte(file, 0XE0 | 0x21); // start oscillator
+	i2c_smbus_write_byte(file, 0x21); // start oscillator
 	i2c_smbus_write_byte(file, 0xE0 | 15); // set brightness to max
 	i2c_smbus_write_byte(file, 0x81); // display on, blink off
 
@@ -127,7 +127,8 @@ void sendCharacters() {
 		// length 8 works best so far.
 
 
-		displaybuffer[0] = 0x01;
+//		displaybuffer[0] = 0x01;
+		displaybuffer[0] = 0x01 | 0x80; // add a decimal point to this one
 		displaybuffer[1] = 0x01;
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x01;
@@ -140,7 +141,8 @@ void sendCharacters() {
 
 		sleep(2);
 
-		displaybuffer[0] = 0x02;
+//		displaybuffer[0] = 0x02;
+		displaybuffer[0] = 0x02 | 0x80; // add a decimal point to this one
 		displaybuffer[1] = 0x02;
 		displaybuffer[2] = 0xFF; // colon.
 		displaybuffer[3] = 0x02;
