@@ -119,11 +119,11 @@ void sendCharacters() {
 
 
 	// print Err
-	displaybuffer[0] = 0x79; // clear
-	displaybuffer[1] = 0x38; // clear
+	displaybuffer[0] = 0x79; // E
+	displaybuffer[1] = 0x9A; // r
 	displaybuffer[2] = 0x00; // colon off
-	displaybuffer[3] = 0x38; // clear
-	displaybuffer[4] = 0x3F; // clear
+	displaybuffer[3] = 0x9A; // r
+	displaybuffer[4] = 0x00; // off
 
 	i2c_smbus_write_i2c_block_data(file, 0x00, sizeof(displaybuffer), (__u8 *)displaybuffer);
 
