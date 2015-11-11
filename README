@@ -1,3 +1,12 @@
+Unfortunately this software should be considered ABANDONED. I will leave it here for anyone who may find it useful, either as a starting point for something else or just to see how poor my C++ skills are.
+
+I am however working on re-implementing this in Python, with an associated mobile app for controlling the brewery, fermenters, and also kegerator (with display).
+The whole project is at https://github.com/vortexau/OpenBrew-Py.git
+
+Basically I reimplemented all my thoughts and ideas in Python so I could learn that language. And I wanted to learn Cordova development, so that's why I used that for the mobile app.
+
+---
+
 OpenBrew. Software for Linux and UNIX-like OS for controlling a Brewery.
 
 I've designed and written this software to suit /my/ brewery, however I aim to keep it extensible enough for modifications to suit larger breweries and installations. As it's a 'home' brewery, I have no desire to implement real-time 'stuff'. If the OS takes a second to respond to a temp or to enable a pump, well it won't be the end of the world. Deal with it :)
