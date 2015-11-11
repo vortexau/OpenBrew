@@ -3,7 +3,7 @@ Unfortunately this software should be considered ABANDONED. I will leave it here
 I am however working on re-implementing this in Python, with an associated mobile app for controlling the brewery, fermenters, and also kegerator (with display).
 The whole project is at https://github.com/vortexau/OpenBrew-Py.git
 
-Basically I reimplemented all my thoughts and ideas in Python so I could learn that language (I know I know! I rubbished it below! Let's just say I've learned it has its place, and it's for things like this!). And I wanted to learn Cordova development, so that's why I used that for the mobile app.
+Basically I reimplemented all my thoughts and ideas in Python so I could learn that language (I know I know! I rubbished it below! Let's just say I've learned it has its place, and it's for things like this! My thoughts on Perl haven't changed though. Sorry.). And I wanted to learn Cordova development, so that's why I used that for the mobile app.
 
 ---
 
